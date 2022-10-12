@@ -16,10 +16,10 @@ class HomeViewController: UIViewController {
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
         return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         view.addSubview(homeFeedTable)
         
@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
         
-        getTrendingMovies()
+        fetchData()
     }
     
     private func configureNavbar() {
@@ -61,11 +61,47 @@ class HomeViewController: UIViewController {
         homeFeedTable.frame = view.bounds
     }
     
-    private func getTrendingMovies() {
+    private func fetchData() {
         APICaller.shared.getTrendingMovies { results in
             switch results {
             case .success(let movies):
                 print(movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
+
+        APICaller.shared.getTrendingTvs { results in
+            switch results {
+            case .success(let tvs):
+                print(tvs)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        APICaller.shared.getPopularMovies { results in
+            switch results {
+            case .success(let popularMovies):
+                print(popularMovies)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        APICaller.shared.getUpcomingMovies { results in
+            switch results {
+            case .success(let upcomingMovies):
+                print(upcomingMovies)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        APICaller.shared.getTopRatedMovies { results in
+            switch results {
+            case .success(let topRatedMovies):
+                print(topRatedMovies)
             case .failure(let error):
                 print(error)
             }
@@ -85,7 +121,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else {
-             return UITableViewCell()
+            return UITableViewCell()
         }
         
         return cell
@@ -96,7 +132,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40 
+        return 40
     }
     // section header başlığının özellikleri
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
