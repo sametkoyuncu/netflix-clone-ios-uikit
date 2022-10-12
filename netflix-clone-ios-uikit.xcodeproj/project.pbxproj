@@ -20,8 +20,7 @@
 		F110B9E428E2023400D548EF /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F110B9E328E2023400D548EF /* HeroHeaderUIView.swift */; };
 		F110B9E628E22A0800D548EF /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F110B9E528E22A0800D548EF /* APICaller.swift */; };
 		F110B9E828E22A3200D548EF /* ignoreThisFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F110B9E728E22A3200D548EF /* ignoreThisFile.swift */; };
-		F110B9EA28E234A200D548EF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F110B9E928E234A200D548EF /* Movie.swift */; };
-		F19E799828F6AA71003362FD /* Tv.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19E799728F6AA71003362FD /* Tv.swift */; };
+		F110B9EA28E234A200D548EF /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = F110B9E928E234A200D548EF /* Title.swift */; };
 		F1E678E428E2CBBB00E902CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E678E328E2CBBB00E902CD /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,8 +40,7 @@
 		F110B9E328E2023400D548EF /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
 		F110B9E528E22A0800D548EF /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		F110B9E728E22A3200D548EF /* ignoreThisFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ignoreThisFile.swift; sourceTree = "<group>"; };
-		F110B9E928E234A200D548EF /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		F19E799728F6AA71003362FD /* Tv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tv.swift; sourceTree = "<group>"; };
+		F110B9E928E234A200D548EF /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		F1E678E328E2CBBB00E902CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,8 +121,7 @@
 		F110B9DE28E1D41600D548EF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F110B9E928E234A200D548EF /* Movie.swift */,
-				F19E799728F6AA71003362FD /* Tv.swift */,
+				F110B9E928E234A200D548EF /* Title.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,7 +214,7 @@
 			files = (
 				F110B9D928E1C59F00D548EF /* SearchViewController.swift in Sources */,
 				F110B9C428E1920A00D548EF /* MainTabBarViewController.swift in Sources */,
-				F110B9EA28E234A200D548EF /* Movie.swift in Sources */,
+				F110B9EA28E234A200D548EF /* Title.swift in Sources */,
 				F110B9E228E1D4B100D548EF /* CollectionViewTableViewCell.swift in Sources */,
 				F110B9E628E22A0800D548EF /* APICaller.swift in Sources */,
 				F110B9E828E22A3200D548EF /* ignoreThisFile.swift in Sources */,
@@ -226,7 +223,6 @@
 				F1E678E428E2CBBB00E902CD /* Extensions.swift in Sources */,
 				F110B9C028E1920A00D548EF /* AppDelegate.swift in Sources */,
 				F110B9C228E1920A00D548EF /* SceneDelegate.swift in Sources */,
-				F19E799828F6AA71003362FD /* Tv.swift in Sources */,
 				F110B9D728E1C57C00D548EF /* UpcomingViewController.swift in Sources */,
 				F110B9D528E1C54300D548EF /* HomeViewController.swift in Sources */,
 			);

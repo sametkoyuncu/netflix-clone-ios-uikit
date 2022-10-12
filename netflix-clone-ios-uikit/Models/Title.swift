@@ -1,17 +1,17 @@
 //
-//  Tv.swift
+//  Movie.swift
 //  netflix-clone-ios-uikit
 //
-//  Created by Samet Koyuncu on 12.10.2022.
+//  Created by Samet Koyuncu on 26.09.2022.
 //
 
 import Foundation
 
-struct TrendingTvResponse: Codable {
-    let results: [Tv]
+struct TitleResponse: Codable {
+    let results: [Title]
 }
 
-struct Tv: Codable {
+struct Title: Codable {
     let id: Int
     let media_type: String?
     let original_name: String?
