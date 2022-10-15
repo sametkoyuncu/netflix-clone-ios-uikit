@@ -102,7 +102,7 @@ class APICaller {
                 let results = try JSONDecoder().decode(TitleResponse.self, from: data)
                 completion(.success(results.results))
             } catch {
-                completion(.failure(APIError.failedToGetData)) 
+                completion(.failure(APIError.failedToGetData))  
             }
         }
         
