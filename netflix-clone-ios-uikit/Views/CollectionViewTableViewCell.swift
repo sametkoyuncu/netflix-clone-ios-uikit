@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol CollectionViewTableViewCellDelegate: AnyObject  {
+    func CollectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell,
+                                               viewModel: TitlePreviewViewModel)
+}
+
 class CollectionViewTableViewCell: UITableViewCell {
     static let identifier = "CollectionViewTableViewCell"
+    
+    weak var delegate: CollectionViewTableViewCellDelegate?
     
     private var titles: [Title] = [Title]()
     
@@ -49,7 +56,32 @@ class CollectionViewTableViewCell: UITableViewCell {
     }
 }
 
-extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension CollectionViewTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        print("runned")
+        let model = titles[indexPath.row]
+        guard let titleName = model.original_title ?? model.original_name else {
+            return
+        }
+        
+        APICaller.shared.getMovie(with: titleName + " trailer") { [weak self] result in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let videoElement):
+                let model = self?.titles[indexPath.row]
+                let viewModel = TitlePreviewViewModel(title: titleName,
+                                                      titleOverview: model?.overview ?? "No content!",
+                                                      youtubeVideo: videoElement)
+                self?.delegate?.CollectionViewTableViewCellDidTapCell(strongSelf, viewModel: viewModel)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
+
+extension CollectionViewTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titles.count
     }
@@ -66,6 +98,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         
         return cell
     }
+    
     
     
 }

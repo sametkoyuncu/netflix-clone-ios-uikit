@@ -27,6 +27,9 @@
 		F1AC3AFB28FA959F00564254 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AC3AFA28FA959F00564254 /* TitleTableViewCell.swift */; };
 		F1AC3AFD28FAA3FA00564254 /* TitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AC3AFC28FAA3FA00564254 /* TitleViewModel.swift */; };
 		F1AC3AFF28FAC88800564254 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AC3AFE28FAC88800564254 /* SearchResultsViewController.swift */; };
+		F1AC3B0328FB246000564254 /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AC3B0228FB246000564254 /* YoutubeSearchResponse.swift */; };
+		F1AC3B0528FBEC4000564254 /* TitlePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AC3B0428FBEC4000564254 /* TitlePreviewViewController.swift */; };
+		F1AC3B0728FBEFD800564254 /* TitlePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AC3B0628FBEFD800564254 /* TitlePreviewViewModel.swift */; };
 		F1E678E428E2CBBB00E902CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E678E328E2CBBB00E902CD /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +54,9 @@
 		F1AC3AFA28FA959F00564254 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		F1AC3AFC28FAA3FA00564254 /* TitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewModel.swift; sourceTree = "<group>"; };
 		F1AC3AFE28FAC88800564254 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		F1AC3B0228FB246000564254 /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
+		F1AC3B0428FBEC4000564254 /* TitlePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewController.swift; sourceTree = "<group>"; };
+		F1AC3B0628FBEFD800564254 /* TitlePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewModel.swift; sourceTree = "<group>"; };
 		F1E678E328E2CBBB00E902CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				F1AC3AFC28FAA3FA00564254 /* TitleViewModel.swift */,
+				F1AC3B0628FBEFD800564254 /* TitlePreviewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -134,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				F110B9E928E234A200D548EF /* Title.swift */,
+				F1AC3B0228FB246000564254 /* YoutubeSearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				F1AC3AFE28FAC88800564254 /* SearchResultsViewController.swift */,
+				F1AC3B0428FBEC4000564254 /* TitlePreviewViewController.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -260,13 +269,16 @@
 				F110B9E828E22A3200D548EF /* ignoreThisFile.swift in Sources */,
 				F110B9E428E2023400D548EF /* HeroHeaderUIView.swift in Sources */,
 				F14C9D4228F6B83A00489C4D /* TitleCollectionViewCell.swift in Sources */,
+				F1AC3B0528FBEC4000564254 /* TitlePreviewViewController.swift in Sources */,
 				F110B9DB28E1C5D700D548EF /* DownloadsViewController.swift in Sources */,
 				F1E678E428E2CBBB00E902CD /* Extensions.swift in Sources */,
 				F1AC3AFB28FA959F00564254 /* TitleTableViewCell.swift in Sources */,
+				F1AC3B0328FB246000564254 /* YoutubeSearchResponse.swift in Sources */,
 				F110B9C028E1920A00D548EF /* AppDelegate.swift in Sources */,
 				F110B9C228E1920A00D548EF /* SceneDelegate.swift in Sources */,
 				F1AC3AFD28FAA3FA00564254 /* TitleViewModel.swift in Sources */,
 				F110B9D728E1C57C00D548EF /* UpcomingViewController.swift in Sources */,
+				F1AC3B0728FBEFD800564254 /* TitlePreviewViewModel.swift in Sources */,
 				F110B9D528E1C54300D548EF /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
