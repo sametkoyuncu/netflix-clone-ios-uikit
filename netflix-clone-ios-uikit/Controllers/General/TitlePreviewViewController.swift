@@ -54,6 +54,8 @@ class TitlePreviewViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
+        navigationController?.navigationBar.tintColor = .white
+        
         configureConstraints()
     }
     
@@ -62,7 +64,7 @@ class TitlePreviewViewController: UIViewController {
             webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            webView.heightAnchor.constraint(equalToConstant: 300 )
+            webView.heightAnchor.constraint(equalToConstant: 280 )
         ]
         
         let titleLabelConstraints = [

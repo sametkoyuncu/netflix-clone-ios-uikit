@@ -106,7 +106,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         // section'a göre api'den veri çekme işlemi
         switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
-            APICaller.shared.getTrendingTvs { result in
+            APICaller.shared.getTrendingMovies { result in
                 switch result {
                 case .success(let titles):
                     cell.configure(with: titles)

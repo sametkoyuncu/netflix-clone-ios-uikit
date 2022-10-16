@@ -67,7 +67,30 @@ class SearchViewController: UIViewController {
 
 // MARK: - table view delegate methods
 extension SearchViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let model = titles[indexPath.row]
+        
+        guard let titleName = model.original_title ?? model.original_name else {
+            return
+        }
+        
+        APICaller.shared.getMovie(with: titleName) { [weak self] result in
+            switch result {
+            case .success(let videoElement):
+                DispatchQueue.main.async {
+                    let vc = TitlePreviewViewController()
+                    vc.configure(with: TitlePreviewViewModel(title: titleName,
+                                                             titleOverview: model.overview ?? "No content!",
+                                                             youtubeVideo: videoElement))
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 // MARK: - table view datasource methods
@@ -104,6 +127,8 @@ extension SearchViewController: UISearchResultsUpdating {
             return
         }
         
+        resultsController.delegate = self
+        
         // burada delegate vs kullanacaktı ama eklemediği için kullanamadı :)
         APICaller.shared.search(with: query) { result in
             DispatchQueue.main.async {
@@ -115,6 +140,16 @@ extension SearchViewController: UISearchResultsUpdating {
                     print(error.localizedDescription)
                 }
             }
+        }
+    }
+}
+
+extension SearchViewController: SearchResultsViewControllerDelegate {
+    func searchResultsViewControllerDidTapItem(_ viewModel: TitlePreviewViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
