@@ -10,7 +10,7 @@ import Foundation
 struct TitleResponse: Codable {
     let results: [Title]
 }
-
+ 
 struct Title: Codable {
     let id: Int
     let media_type: String?
