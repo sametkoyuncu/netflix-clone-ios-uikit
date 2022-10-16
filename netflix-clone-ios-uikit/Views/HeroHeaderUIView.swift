@@ -81,4 +81,12 @@ class HeroHeaderUIView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func configure(with model: TitleViewModel) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(model.posterURL )") else {
+            return
+        }
+        
+        heroImageView.sd_setImage(with: url, completed: nil )
+    }
+    
 }
