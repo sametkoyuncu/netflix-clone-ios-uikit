@@ -19,6 +19,17 @@ class TitlePreviewViewController: UIViewController {
     
     private var buttonType: DownloadButtonType = .download
     
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Close", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .red
+        
+        return button
+    }()
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -57,6 +68,7 @@ class TitlePreviewViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        view.addSubview(closeButton)
         view.addSubview(webView)
         view.addSubview(titleLabel)
         view.addSubview(overviewLabel)
@@ -64,11 +76,11 @@ class TitlePreviewViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        navigationController?.navigationBar.tintColor = .white
-        
         configureConstraints()
         
         downloadButton.addTarget(self, action: #selector(downloadButtonTapped(_:)), for: .touchUpInside)
+        
+        closeButton.addTarget(self, action: #selector(myLeftSideBarButtonItemTapped(_:)), for: .touchUpInside)
         
         // when add to core data, reload button ui
         NotificationCenter.default.addObserver(forName: NSNotification.Name("downloaded"),
@@ -83,8 +95,14 @@ class TitlePreviewViewController: UIViewController {
     }
     
     private func configureConstraints() {
+        let closeButtonConstraints = [
+            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            closeButton.heightAnchor.constraint(equalToConstant: 100)
+        ]
+        
         let webViewConstraints = [
-            webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            webView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 8),
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             webView.heightAnchor.constraint(equalToConstant: 280)
@@ -109,10 +127,14 @@ class TitlePreviewViewController: UIViewController {
             downloadButton.heightAnchor.constraint(equalToConstant: 40)
         ]
         
+       
+        
+        NSLayoutConstraint.activate(closeButtonConstraints)
         NSLayoutConstraint.activate(webViewConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(overviewLabelConstraints)
         NSLayoutConstraint.activate(downloadButtonConstraints)
+        
     }
     
     func configure(with model: TitlePreviewViewModel) {
@@ -182,4 +204,10 @@ class TitlePreviewViewController: UIViewController {
             }
         }
     }
+    
+    
+    @IBAction func myLeftSideBarButtonItemTapped(_ sender:UIButton!)
+       {
+           dismiss(animated: true)
+       }
 }

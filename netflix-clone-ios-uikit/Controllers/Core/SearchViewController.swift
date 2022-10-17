@@ -85,7 +85,9 @@ extension SearchViewController: UITableViewDelegate {
                                                              titleOverview: model.overview ?? "No content!",
                                                              youtubeVideo: videoElement,
                                                              titleModel: model))
-                    self?.navigationController?.pushViewController(vc, animated: true)
+                    //self?.navigationController?.pushViewController(vc, animated: true)
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc, animated: true)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -150,7 +152,9 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
         DispatchQueue.main.async { [weak self] in
             let vc = TitlePreviewViewController()
             vc.configure(with: viewModel)
-            self?.navigationController?.pushViewController(vc, animated: true)
+            vc.modalPresentationStyle = .fullScreen
+            self?.present(vc, animated: true)
+            //self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

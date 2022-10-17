@@ -87,7 +87,9 @@ extension DownloadsViewController: UITableViewDelegate {
                                                                                vote_count: Int(model.vote_count),
                                                                                release_date: model.release_date,
                                                                                vote_average: model.vote_average)))
-                    self?.navigationController?.pushViewController(vc, animated: true)
+                    //self?.navigationController?.pushViewController(vc, animated: true)
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc, animated: true)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
