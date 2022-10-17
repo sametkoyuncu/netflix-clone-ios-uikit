@@ -67,6 +67,19 @@ class CollectionViewTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    private func removeTitleAt(indexPath: IndexPath) {
+        DataPersistenceManager.shared.deleteTitleBy(id: titles[indexPath.row].id) { result in
+            switch result {
+            case .success():
+                // reload downloads screen data
+                NotificationCenter.default.post(name: NSNotification.Name("downloaded"), object: nil)
+                // cell deki icon da burada güncellenebilir
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension CollectionViewTableViewCell: UICollectionViewDelegate {
@@ -96,6 +109,10 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate {
 }
 
 extension CollectionViewTableViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titles.count
     }
@@ -105,10 +122,9 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        guard let model = titles[indexPath.row].poster_path else {
-            return UICollectionViewCell()
+        if let model = titles[indexPath.row].poster_path {
+            cell.configure(with: model)
         }
-        cell.configure(with: model)
         
         return cell
     }
@@ -117,19 +133,48 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(identifier: nil,
                                                 previewProvider: nil) { [weak self] _ in
-            let downloadAction = UIAction(title: "Download",
-                                          subtitle: nil,
-                                          image: nil,
-                                          identifier: nil,
-                                          discoverabilityTitle: nil,
-                                          state: .off) { _ in
-                self?.downloadTitleAt(indexPath: indexPath)
+            
+            var action: UIAction?
+            
+            DataPersistenceManager.shared.isDownloaded(self?.titles[indexPath.row].id ?? 0) { result in
+                switch result {
+                case .success(let isDownloaded):
+                    if isDownloaded {
+                        action = UIAction(title: "Delete",
+                                                      subtitle: nil,
+                                                      image: nil,
+                                                      identifier: nil,
+                                                      discoverabilityTitle: nil,
+                                                      state: .off) { _ in
+                            self?.removeTitleAt(indexPath: indexPath)
+                        }
+                    } else {
+                            action = UIAction(title: "Download",
+                                                          subtitle: nil,
+                                                          image: nil,
+                                                          identifier: nil,
+                                                          discoverabilityTitle: nil,
+                                                          state: .off) { _ in
+                                self?.downloadTitleAt(indexPath: indexPath)
+                        }
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    action = UIAction(title: "Download",
+                                                  subtitle: nil,
+                                                  image: nil,
+                                                  identifier: nil,
+                                                  discoverabilityTitle: nil,
+                                                  state: .off) { _ in
+                        self?.downloadTitleAt(indexPath: indexPath)
+                    }
+                }
             }
             return UIMenu(title: "",
                           image: nil,
                           identifier: nil,
                           options: .displayInline,
-                          children: [downloadAction])
+                          children: [action!])
         }
         return config
     }
