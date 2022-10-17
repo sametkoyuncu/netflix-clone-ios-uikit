@@ -83,7 +83,8 @@ extension SearchViewController: UITableViewDelegate {
                     let vc = TitlePreviewViewController()
                     vc.configure(with: TitlePreviewViewModel(title: titleName,
                                                              titleOverview: model.overview ?? "No content!",
-                                                             youtubeVideo: videoElement))
+                                                             youtubeVideo: videoElement,
+                                                             titleModel: model))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let error):
@@ -105,7 +106,7 @@ extension SearchViewController: UITableViewDataSource {
         }
         let model = titles[indexPath.row]
         cell.configure(with: TitleViewModel(titleName: model.original_title ?? model.original_name ?? "Unknown*",
-                                            posterURL: model.poster_path ?? "" ))
+                                            posterURL: model.poster_path ?? ""))
         return cell
     }
     

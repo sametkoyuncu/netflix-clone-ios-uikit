@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
                 let selectedTitle = titles.randomElement()
                 self?.randomTrendingMovie = selectedTitle
                 self?.headerView?.configure(with: TitleViewModel(titleName: selectedTitle?.original_title ?? "",
-                                                                 posterURL: selectedTitle?.poster_path ?? ""  ))
+                                                                 posterURL: selectedTitle?.poster_path ?? ""))
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -77,7 +77,16 @@ extension DownloadsViewController: UITableViewDelegate {
                     let vc = TitlePreviewViewController()
                     vc.configure(with: TitlePreviewViewModel(title: titleName,
                                                              titleOverview: model.overview ?? "No content!",
-                                                             youtubeVideo: videoElement))
+                                                             youtubeVideo: videoElement,
+                                                             titleModel: .init(id: Int(model.id),
+                                                                               media_type: model.media_type,
+                                                                               original_name: model.original_name,
+                                                                               original_title: model.original_title,
+                                                                               poster_path: model.poster_path,
+                                                                               overview: model.overview,
+                                                                               vote_count: Int(model.vote_count),
+                                                                               release_date: model.release_date,
+                                                                               vote_average: model.vote_average)))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let error):

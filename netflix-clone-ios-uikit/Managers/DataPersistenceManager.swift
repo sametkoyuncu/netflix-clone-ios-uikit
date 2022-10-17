@@ -12,6 +12,8 @@ enum DatabaseError: Error {
     case failedToSaveData
     case failedToFetchData
     case failedToDeleteData
+    case failedToDeleteDataWith404
+    case failedToCheckDownloadedData
 }
 
 class DataPersistenceManager {
@@ -20,9 +22,9 @@ class DataPersistenceManager {
     private init() {}
     
     func downloadTitleWith(model: Title, completion: @escaping (Result<Void, Error>) -> Void) {
-        let managedContext = AppDelegate.sharedAppDelegate.coreDataStack.managedContext
-                
-        let item = TitleItem(context: managedContext)
+        let context = AppDelegate.sharedAppDelegate.coreDataStack.managedContext
+        
+        let item = TitleItem(context: context)
         
         item.id = Int64(model.id)
         item.original_title = model.original_title
@@ -35,7 +37,7 @@ class DataPersistenceManager {
         item.vote_count = Int64(model.vote_count)
         
         do {
-            try managedContext.save()
+            try context.save()
             completion(.success(()))
         } catch {
             completion(.failure(DatabaseError.failedToSaveData ))
@@ -43,14 +45,14 @@ class DataPersistenceManager {
     }
     
     func fetchingTitlesFromDatabase(completion: @escaping (Result<[TitleItem], Error>) -> Void) {
-        let managedContext = AppDelegate.sharedAppDelegate.coreDataStack.managedContext
+        let context = AppDelegate.sharedAppDelegate.coreDataStack.managedContext
         
         let request: NSFetchRequest<TitleItem>
         
         request = TitleItem.fetchRequest()
         
         do {
-            let titles = try managedContext.fetch(request)
+            let titles = try context.fetch(request)
             completion(.success(titles))
         } catch {
             completion(.failure(DatabaseError.failedToFetchData))
@@ -58,15 +60,60 @@ class DataPersistenceManager {
     }
     
     func deleteTitleWith(model: TitleItem, completion: @escaping (Result<Void, Error>) -> Void) {
-        let managedContext = AppDelegate.sharedAppDelegate.coreDataStack.managedContext
+        let context = AppDelegate.sharedAppDelegate.coreDataStack.managedContext
         
-        managedContext.delete(model)
+        context.delete(model)
         
         do {
-            try managedContext.save()
+            try context.save()
             completion(.success(()))
         } catch {
             completion(.failure(DatabaseError.failedToDeleteData))
+        }
+    }
+    
+    func deleteTitleBy(id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        let fetchRequest: NSFetchRequest<TitleItem> = TitleItem.fetchRequest()
+        let predicate = NSPredicate(format: "(id = %@)", NSNumber(value: id))
+        fetchRequest.predicate = predicate
+        
+        let context = AppDelegate.sharedAppDelegate.coreDataStack.managedContext
+        
+        do {
+            let result = try context.fetch(fetchRequest).first
+            
+            if let result = result {
+                context.delete(result)
+                
+                try context.save()
+                completion(.success(()))
+            }
+            
+            completion(.failure(DatabaseError.failedToDeleteDataWith404))
+            
+        } catch {
+            completion(.failure(DatabaseError.failedToDeleteData))
+        }
+    }
+    
+    func isDownloaded(_ id: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let fetchRequest: NSFetchRequest<TitleItem> = TitleItem.fetchRequest()
+        let predicate = NSPredicate(format: "(id = %@)", NSNumber(value: id))
+        fetchRequest.predicate = predicate
+        
+        let context = AppDelegate.sharedAppDelegate.coreDataStack.managedContext
+        
+        do {
+            let result = try context.fetch(fetchRequest).first
+            
+            if let _ = result {
+                completion(.success(true))
+            } else {
+                completion(.success(false))
+            }
+            
+        } catch {
+            completion(.failure(DatabaseError.failedToCheckDownloadedData))
         }
     }
 }

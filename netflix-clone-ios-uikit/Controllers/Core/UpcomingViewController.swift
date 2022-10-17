@@ -72,7 +72,7 @@ extension UpcomingViewController: UITableViewDelegate {
                     let vc = TitlePreviewViewController()
                     vc.configure(with: TitlePreviewViewModel(title: titleName,
                                                              titleOverview: model.overview ?? "No content!",
-                                                             youtubeVideo: videoElement))
+                                                             youtubeVideo: videoElement, titleModel: model))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let error):

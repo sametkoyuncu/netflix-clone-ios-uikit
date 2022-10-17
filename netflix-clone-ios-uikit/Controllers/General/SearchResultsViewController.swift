@@ -59,7 +59,7 @@ extension SearchResultsViewController: UICollectionViewDelegate {
             case .success(let videoElement):
                 self?.delegate?.searchResultsViewControllerDidTapItem(TitlePreviewViewModel(title: titleName,
                                                                                       titleOverview: model.overview ?? "No content!",
-                                                                                      youtubeVideo: videoElement))
+                                                                                      youtubeVideo: videoElement, titleModel: model))
             case .failure(let error):
                 print(error.localizedDescription)
             }

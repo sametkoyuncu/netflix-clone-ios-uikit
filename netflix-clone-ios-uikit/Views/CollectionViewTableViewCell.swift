@@ -61,6 +61,7 @@ class CollectionViewTableViewCell: UITableViewCell {
             case .success():
                 // reload downloads screen data
                 NotificationCenter.default.post(name: NSNotification.Name("downloaded"), object: nil)
+                // cell deki icon da burada güncellenebilir
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -84,7 +85,8 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate {
                 let model = self?.titles[indexPath.row]
                 let viewModel = TitlePreviewViewModel(title: titleName,
                                                       titleOverview: model?.overview ?? "No content!",
-                                                      youtubeVideo: videoElement)
+                                                      youtubeVideo: videoElement,
+                                                      titleModel: model!)
                 self?.delegate?.CollectionViewTableViewCellDidTapCell(strongSelf, viewModel: viewModel)
             case .failure(let error):
                 print(error.localizedDescription)
