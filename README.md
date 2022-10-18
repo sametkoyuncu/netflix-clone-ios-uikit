@@ -17,6 +17,9 @@ Uygulama programmatic ui ile geliştirildi. Büyük kısmını [iOS Development 
 - CoreData
 - URLSession
 - SDWebImage
+- Notification Center
+- Delegation Pattern
+- Closures for notification and data transfer
 
 ## Ekran Görüntüleri
 
@@ -29,3 +32,17 @@ Uygulama programmatic ui ile geliştirildi. Büyük kısmını [iOS Development 
 ## Ekran Kaydı
 
 [![youtube-video](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/youtube.png)](https://www.youtube.com/embed/rLWiDc0GMEo)
+
+## Kurulum
+- Projeyi indirin veya clone'layın.
+- `spm` ile `SdWebImage` paketini yükleyin.
+- TMDB ve Google Developer Console'dan alacağınız API key'i `Managers > APICaller.swift` dosyasındaki ilgili yerlere ekleyin.
+```swift
+struct Constants {
+    static let API_KEY = K.API_KEY // your TMDB api key here
+    static let baseURL = "https://api.themoviedb.org"
+    static let YOUTUBE_API_KEY = K.GOOGLE_API_KEY // your GOOGLE api key here
+    static let youtubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
+}
+```
+- Proje kullanıma hazır, keyfini sürün 🎉😊
