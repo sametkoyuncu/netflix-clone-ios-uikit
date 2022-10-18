@@ -21,18 +21,6 @@ Uygulama programmatic ui ile geliştirildi. Büyük kısmını [iOS Development 
 - Delegation Pattern
 - Closures for notification and data transfer
 
-## Ekran Görüntüleri
-
-![ss1](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/netflixClone1.png)
-
-![ss2](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/netflixClone2.png)
-
-![ss3](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/netflixClone3.png)
-
-## Ekran Kaydı
-
-[![youtube-video](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/youtube.png)](https://www.youtube.com/embed/rLWiDc0GMEo)
-
 ## Kurulum
 - Projeyi indirin veya clone'layın.
 - `spm` ile `SdWebImage` paketini yükleyin.
@@ -46,3 +34,15 @@ struct Constants {
 }
 ```
 - Proje kullanıma hazır, keyfini sürün 🎉😊
+
+## Ekran Görüntüleri
+
+![ss1](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/netflixClone1.png)
+
+![ss2](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/netflixClone2.png)
+
+![ss3](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/netflixClone3.png)
+
+## Ekran Kaydı
+
+[![youtube-video](https://github.com/sametkoyuncu/netflix-clone-ios-uikit/blob/main/screenshots/youtube.png)](https://www.youtube.com/embed/rLWiDc0GMEo)
